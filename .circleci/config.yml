@@ -21,3 +21,5 @@ workflows:
     jobs:
       - docker/hadolint
       - build
+          requires:
+            - docker/hadolint
