@@ -7,9 +7,10 @@ workflows:
   workflow:
     jobs:
       - docker/publish:
-          executor: machine
-            - dlc: true
+          executor:
+            name: docker/machine
+            dlc: true
           lint-dockerfile: true
-          docker-username: $DOCKERHUB_USERNAME
-          docker-password: $DOCKERHUB_PASSWORD
-          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          docker-username: DOCKERHUB_USERNAME
+          docker-password: DOCKERHUB_PASSWORD
+          image: mfunaki/cci-orbs-01
