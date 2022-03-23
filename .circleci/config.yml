@@ -20,6 +20,6 @@ workflows:
   workflow:
     jobs:
       - docker/hadolint
-      - build
+      - build:
           requires:
             - docker/hadolint
