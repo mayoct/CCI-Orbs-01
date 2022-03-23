@@ -3,23 +3,13 @@ version: 2.1
 orbs:
   docker: circleci/docker@2.0.3
 
-jobs:
-  build:
-    docker:
-      - image: cimg/node:current
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: docker build .
-
 workflows:
   workflow:
     jobs:
-      - docker/hadolint
-      - build:
-          requires:
-            - docker/hadolint
+      - docker/publish:
+          executor: machine
+            - dlc: true
+          lint-dockerfile: true
+          docker-username: $DOCKERHUB_USERNAME
+          docker-password: $DOCKERHUB_PASSWORD
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
