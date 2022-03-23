@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@2.0.3
+
 jobs:
   build:
     docker:
@@ -12,3 +15,9 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker build .
+
+workflows:
+  workflow:
+    jobs:
+      - docker/hadolint
+      - build
